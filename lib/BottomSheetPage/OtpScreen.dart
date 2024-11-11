@@ -18,6 +18,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
   int _seconds = 30;
   List<TextEditingController> _otpControllers =
       List.generate(4, (_) => TextEditingController());
+  bool _isFormValid = false; // Track if the form is valid
 
   @override
   void initState() {
@@ -60,14 +61,25 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
           ),
+          filled: true,
+          fillColor: Colors.grey[200],
         ),
         onChanged: (value) {
           if (value.isNotEmpty && index < _otpControllers.length - 1) {
             FocusScope.of(context).nextFocus();
           }
+          _validateForm(); // Validate form whenever OTP field is changed
         },
       ),
     );
+  }
+
+  void _validateForm() {
+    // Check if all OTP fields have text
+    setState(() {
+      _isFormValid =
+          _otpControllers.every((controller) => controller.text.isNotEmpty);
+    });
   }
 
   @override
@@ -126,7 +138,9 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: widget.onNext,
+              onPressed: _isFormValid
+                  ? widget.onNext
+                  : null, // Disable button if form is invalid
               child: Text("Verify",
                   style: TextStyle(
                       fontSize: 18,
@@ -134,7 +148,8 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
                       color: Colors.white)),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 50),
-                backgroundColor: Color(0xFF0075FF),
+                backgroundColor:
+                    _isFormValid ? Color(0xFF0075FF) : Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),

@@ -69,8 +69,7 @@ class _PasswordCreationBottomSheetState
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 20),
-          SizedBox(height: 10),
+          SizedBox(height: 5),
           Row(
             children: [
               IconButton(
@@ -85,12 +84,12 @@ class _PasswordCreationBottomSheetState
               ),
             ],
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 6),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("Enter password", style: TextStyle(fontSize: 14)),
-              SizedBox(height: 8),
+              SizedBox(height: 5),
               TextField(
                 controller: _passwordController,
                 obscureText: !_isPasswordVisible,
@@ -109,7 +108,7 @@ class _PasswordCreationBottomSheetState
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 6),
               Text("Re-enter password", style: TextStyle(fontSize: 14)),
               SizedBox(height: 8),
               TextField(
@@ -130,7 +129,7 @@ class _PasswordCreationBottomSheetState
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 6),
               Text(
                 "*Your password must include at least 8 characters, inclusive of at least 1 special character",
                 style: TextStyle(fontSize: 12, color: Colors.grey),
@@ -145,7 +144,7 @@ class _PasswordCreationBottomSheetState
                 ),
             ],
           ),
-          SizedBox(height: 12),
+          SizedBox(height: 6),
           Row(
             children: [
               Expanded(
